@@ -2,7 +2,7 @@ package inMemo
 
 import (
 	"errors"
-	"hexagonal/internal/user/repository"
+	"hexagonal/internal/core/ports"
 	"sync"
 )
 
@@ -11,7 +11,7 @@ type UserInMemo struct {
 	mutex  *sync.Mutex
 }
 
-func NewUserInMemo() repository.Repository {
+func NewUserInMemo() ports.UserRepository {
 	return &UserInMemo{
 		memory: make(map[int]map[string]interface{}),
 		mutex:  new(sync.Mutex),
@@ -22,7 +22,7 @@ func (u *UserInMemo) Get(id int) (map[string]interface{}, error) {
 	if value, ok := u.memory[id]; ok {
 		return value, nil
 	}
-	return nil, errors.New("user not found")
+	return nil, errors.New("handler not found")
 }
 func (u *UserInMemo) GetAll() ([]map[string]interface{}, error) {
 	tmpUserList := []map[string]interface{}{}

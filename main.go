@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	"hexagonal/internal/user/repository/inMemo"
-	"hexagonal/internal/user/service"
+	"hexagonal/internal/core/services/userService"
+	"hexagonal/internal/repository/inMemo"
 )
 
 func main() {
 	userRepo := inMemo.NewUserInMemo()
-	userService := service.NewUserService(userRepo)
+	userService := userService.NewUserService(userRepo)
 
 	fmt.Println(userService.Create(1, "Alper"))
 	fmt.Println(userService.Create(2, "Alameddin"))
